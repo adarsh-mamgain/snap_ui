@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_ui/snap_ui.dart';
+import 'package:snap_ui/src/themes/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: TailwindColors.white,
+        backgroundColor: SnapColors.white,
         surfaceTintColor: Colors.transparent,
         title: const Text('Custom Theme Example'),
         content: SingleChildScrollView(
@@ -52,12 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
               const Text('This dialog demonstrates a custom theme'),
               const SizedBox(height: 16),
               SnapCard(
-                theme: SnapUiTheme.custom(
-                  primaryColor: TailwindColors.purple[600],
-                  secondaryColor: TailwindColors.purple[100],
-                  backgroundColor: TailwindColors.gray[50],
-                  borderRadius: TailwindBorderRadius.xl2,
-                ),
+                backgroundColor: SnapColors.purple[600]!,
+                borderRadius: SnapRadius.xl2,
+                padding: const EdgeInsets.all(SnapSpacing.md),
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Custom themed card'),
@@ -80,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: TailwindColors.white,
+        backgroundColor: SnapColors.white,
         surfaceTintColor: Colors.transparent,
         title: const Text('Tailwind Utils Example'),
         content: SingleChildScrollView(
@@ -90,15 +88,9 @@ class _MyHomePageState extends State<MyHomePage> {
               const Text('This dialog demonstrates the TailwindUtils class'),
               const SizedBox(height: 16),
               SnapCard(
-                theme: TailwindUtils.themeFromTailwindClasses(
-                  primaryColorClass: 'bg-green-600',
-                  secondaryColorClass: 'bg-green-100',
-                  backgroundColorClass: 'bg-gray-50',
-                  textColorClass: 'text-gray-900',
-                  borderColorClass: 'border-green-200',
-                  borderRadiusClass: 'rounded-xl',
-                  paddingClass: 'p-2',
-                ),
+                backgroundColor: SnapColors.green[600]!,
+                borderRadius: SnapRadius.xl,
+                padding: const EdgeInsets.all(SnapSpacing.md),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -116,13 +108,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       const SizedBox(height: 16),
                       Container(
-                        padding: TailwindUtils.paddingFromTailwindClass('p-2'),
+                        padding: const EdgeInsets.all(SnapSpacing.md),
                         decoration: BoxDecoration(
-                          color: TailwindUtils.colorFromTailwindClass(
-                              'bg-green-800'),
-                          borderRadius:
-                              TailwindUtils.borderRadiusFromTailwindClass(
-                                  'rounded-lg'),
+                          color: SnapColors.green[800],
+                          borderRadius: SnapRadius.lg,
                         ),
                         child: const Text('Container with Tailwind classes'),
                       ),
@@ -149,7 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
       theme: _currentTheme,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
           title: Text(widget.title),
           actions: [
             IconButton(
@@ -169,14 +159,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'SnapUI Card',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           'This card uses the current theme: ${_isDarkMode ? "Dark" : "Light"}',
                         ),
@@ -184,10 +174,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 SnapElevatedCard(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         Text(
@@ -205,31 +195,31 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SnapPrimaryButton(
                       onPressed: () {},
-                      child: Text('Primary'),
+                      child: const Text('Primary'),
                     ),
                     SnapSecondaryButton(
                       onPressed: () {},
-                      child: Text('Secondary'),
+                      child: const Text('Secondary'),
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SnapTextButton(
                       onPressed: _showCustomThemeDialog,
-                      child: Text('Custom Theme'),
+                      child: const Text('Custom Theme'),
                     ),
                     SnapTextButton(
                       onPressed: _showTailwindUtilsDialog,
-                      child: Text('Tailwind Utils'),
+                      child: const Text('Tailwind Utils'),
                     ),
                   ],
                 ),

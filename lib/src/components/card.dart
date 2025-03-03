@@ -1,48 +1,117 @@
 import 'package:flutter/material.dart';
 import 'package:snap_ui/src/themes/theme.dart';
 
+enum SnapCardVariant { elevated, outlined, filled }
+
 class SnapCard extends StatelessWidget {
   final Widget child;
-  final SnapUiTheme? theme;
-  final Color? backgroundColor;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
-  final double? width;
-  final double? height;
+  final Color? backgroundColor;
+  final Color? color;
+  final Border? border;
+  final List<BoxShadow>? boxShadow;
+  final double? elevation;
+  final bool? usePrimaryColorForShadow;
+  final SnapCardVariant variant;
+  final VoidCallback? onTap;
+  final bool isHoverable;
+  final bool isClickable;
 
   const SnapCard({
-    super.key, 
+    super.key,
     required this.child,
-    this.theme,
-    this.backgroundColor,
     this.padding,
     this.borderRadius,
-    this.width,
-    this.height,
+    this.backgroundColor,
+    this.color,
+    this.border,
+    this.boxShadow,
+    this.elevation,
+    this.usePrimaryColorForShadow,
+    this.variant = SnapCardVariant.elevated,
+    this.onTap,
+    this.isHoverable = true,
+    this.isClickable = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = theme ?? SnapUiThemeProvider.of(context);
-    
-    return Container(
-      width: width ?? double.infinity,
-      height: height,
-      padding: padding ?? currentTheme.padding,
+    final theme = SnapUiThemeProvider.of(context);
+
+    // Determine card properties based on variant
+    final CardProperties properties = _getCardProperties(theme);
+
+    Widget card = Container(
+      padding: padding ?? theme.padding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? currentTheme.backgroundColor,
-        border: currentTheme.border,
-        borderRadius: borderRadius ?? currentTheme.borderRadius,
-        boxShadow: currentTheme.boxShadow,
+        color: backgroundColor ?? properties.backgroundColor,
+        borderRadius: borderRadius ?? theme.borderRadius,
+        border: border ?? properties.border,
+        boxShadow: boxShadow ?? properties.boxShadow,
       ),
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: currentTheme.textColor,
-        ),
-        child: child,
-      ),
+      child: child,
     );
+
+    // Add hover effect if card is hoverable
+    if (isHoverable) {
+      card = MouseRegion(
+        cursor:
+            isClickable ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        child: card,
+      );
+    }
+
+    // Add tap handler if card is clickable
+    if (isClickable && onTap != null) {
+      card = GestureDetector(onTap: onTap, child: card);
+    }
+
+    return card;
   }
+
+  CardProperties _getCardProperties(SnapUiTheme theme) {
+    switch (variant) {
+      case SnapCardVariant.elevated:
+        return CardProperties(
+          backgroundColor: theme.backgroundColor,
+          border: null,
+          boxShadow:
+              theme
+                  .copyWith(
+                    elevation: elevation,
+                    usePrimaryColorForShadow: usePrimaryColorForShadow,
+                  )
+                  .effectiveBoxShadow,
+        );
+
+      case SnapCardVariant.outlined:
+        return CardProperties(
+          backgroundColor: theme.backgroundColor,
+          border: Border.all(color: theme.borderColor, width: 1),
+          boxShadow: const [],
+        );
+
+      case SnapCardVariant.filled:
+        return CardProperties(
+          backgroundColor: theme.primaryColor.withOpacity(0.1),
+          border: null,
+          boxShadow: const [],
+        );
+    }
+  }
+}
+
+class CardProperties {
+  final Color backgroundColor;
+  final Border? border;
+  final List<BoxShadow> boxShadow;
+
+  const CardProperties({
+    required this.backgroundColor,
+    this.border,
+    required this.boxShadow,
+  });
 }
 
 /// A card with elevated appearance
@@ -50,43 +119,83 @@ class SnapElevatedCard extends SnapCard {
   SnapElevatedCard({
     super.key,
     required super.child,
-    super.theme,
-    super.backgroundColor,
     super.padding,
     super.borderRadius,
-    super.width,
-    super.height,
-    List<BoxShadow>? boxShadow,
+    super.backgroundColor,
+    super.border,
+    super.boxShadow,
+    super.elevation,
+    super.usePrimaryColorForShadow,
+    super.variant,
+    super.onTap,
+    super.isHoverable,
+    super.isClickable,
   });
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = theme ?? SnapUiThemeProvider.of(context);
-    
-    return Container(
-      width: width ?? double.infinity,
-      height: height,
-      padding: padding ?? currentTheme.padding,
+    final theme = SnapUiThemeProvider.of(context);
+
+    // Determine card properties based on variant
+    final CardProperties properties = _getCardProperties(theme);
+
+    Widget card = Container(
+      padding: padding ?? theme.padding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? currentTheme.backgroundColor,
-        border: currentTheme.border,
-        borderRadius: borderRadius ?? currentTheme.borderRadius,
-        boxShadow: [
-          BoxShadow(
-            color: currentTheme.shadowColor.withOpacity(0.2),
-            offset: const Offset(0, 4),
-            blurRadius: 12,
-            spreadRadius: 0,
-          ),
-        ],
+        color: backgroundColor ?? properties.backgroundColor,
+        borderRadius: borderRadius ?? theme.borderRadius,
+        border: border ?? properties.border,
+        boxShadow: boxShadow ?? properties.boxShadow,
       ),
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: currentTheme.textColor,
-        ),
-        child: child,
-      ),
+      child: child,
     );
+
+    // Add hover effect if card is hoverable
+    if (isHoverable) {
+      card = MouseRegion(
+        cursor:
+            isClickable ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        child: card,
+      );
+    }
+
+    // Add tap handler if card is clickable
+    if (isClickable && onTap != null) {
+      card = GestureDetector(onTap: onTap, child: card);
+    }
+
+    return card;
+  }
+
+  CardProperties _getCardProperties(SnapUiTheme theme) {
+    switch (variant) {
+      case SnapCardVariant.elevated:
+        return CardProperties(
+          backgroundColor: theme.backgroundColor,
+          border: null,
+          boxShadow:
+              theme
+                  .copyWith(
+                    elevation: elevation,
+                    usePrimaryColorForShadow: usePrimaryColorForShadow,
+                  )
+                  .effectiveBoxShadow,
+        );
+
+      case SnapCardVariant.outlined:
+        return CardProperties(
+          backgroundColor: theme.backgroundColor,
+          border: Border.all(color: theme.borderColor, width: 1),
+          boxShadow: const [],
+        );
+
+      case SnapCardVariant.filled:
+        return CardProperties(
+          backgroundColor: theme.primaryColor.withOpacity(0.1),
+          border: null,
+          boxShadow: const [],
+        );
+    }
   }
 }
 
@@ -95,32 +204,82 @@ class SnapFlatCard extends SnapCard {
   SnapFlatCard({
     super.key,
     required super.child,
-    super.theme,
-    super.backgroundColor,
     super.padding,
     super.borderRadius,
-    super.width,
-    super.height,
+    super.backgroundColor,
+    super.border,
+    super.boxShadow,
+    super.elevation,
+    super.usePrimaryColorForShadow,
+    super.variant,
+    super.onTap,
+    super.isHoverable,
+    super.isClickable,
   });
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = theme ?? SnapUiThemeProvider.of(context);
-    
-    return Container(
-      width: width ?? double.infinity,
-      height: height,
-      padding: padding ?? currentTheme.padding,
+    final theme = SnapUiThemeProvider.of(context);
+
+    // Determine card properties based on variant
+    final CardProperties properties = _getCardProperties(theme);
+
+    Widget card = Container(
+      padding: padding ?? theme.padding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? currentTheme.backgroundColor,
-        borderRadius: borderRadius ?? currentTheme.borderRadius,
+        color: backgroundColor ?? properties.backgroundColor,
+        borderRadius: borderRadius ?? theme.borderRadius,
+        border: border ?? properties.border,
+        boxShadow: boxShadow ?? properties.boxShadow,
       ),
-      child: DefaultTextStyle(
-        style: TextStyle(
-          color: currentTheme.textColor,
-        ),
-        child: child,
-      ),
+      child: child,
     );
+
+    // Add hover effect if card is hoverable
+    if (isHoverable) {
+      card = MouseRegion(
+        cursor:
+            isClickable ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        child: card,
+      );
+    }
+
+    // Add tap handler if card is clickable
+    if (isClickable && onTap != null) {
+      card = GestureDetector(onTap: onTap, child: card);
+    }
+
+    return card;
+  }
+
+  CardProperties _getCardProperties(SnapUiTheme theme) {
+    switch (variant) {
+      case SnapCardVariant.elevated:
+        return CardProperties(
+          backgroundColor: theme.backgroundColor,
+          border: null,
+          boxShadow:
+              theme
+                  .copyWith(
+                    elevation: elevation,
+                    usePrimaryColorForShadow: usePrimaryColorForShadow,
+                  )
+                  .effectiveBoxShadow,
+        );
+
+      case SnapCardVariant.outlined:
+        return CardProperties(
+          backgroundColor: theme.backgroundColor,
+          border: Border.all(color: theme.borderColor, width: 1),
+          boxShadow: const [],
+        );
+
+      case SnapCardVariant.filled:
+        return CardProperties(
+          backgroundColor: theme.primaryColor.withOpacity(0.1),
+          border: null,
+          boxShadow: const [],
+        );
+    }
   }
 }
