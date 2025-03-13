@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:snap_ui/snap_ui.dart';
 import 'package:snap_ui/src/themes/theme.dart';
 import 'package:snap_ui/src/components/buttons/buttons.dart';
 import 'package:snap_ui/src/components/inputs/inputs.dart';
+import 'package:snap_ui/src/components/cards/cards.dart';
+import 'package:snap_ui/src/components/lists/lists.dart';
+import 'package:snap_ui/src/components/dialogs/dialogs.dart';
 
 void main() {
   runApp(const MyApp());
@@ -741,6 +745,284 @@ class HomePage extends StatelessWidget {
                     hint: 'This date picker is disabled',
                     isDisabled: true,
                     showCalendarIcon: false,
+                  ),
+                ],
+              ),
+            ),
+
+            // Card section
+            SizedBox(height: theme.spacing.twentyFour),
+            Container(
+              width: double.infinity,
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Card Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Basic Card
+                  Text(
+                    'Basic Card',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapCard(
+                    child: Text('This is a basic card with default styling'),
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Interactive Card
+                  Text(
+                    'Interactive Card',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapCard(
+                    isInteractive: true,
+                    onTap: () {},
+                    child: Text('Tap me!'),
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Custom Card
+                  Text(
+                    'Custom Card',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapCard(
+                    backgroundColor: theme.primaryColor.withOpacity(0.1),
+                    padding: theme.spacing.all(8),
+                    margin: theme.spacing.all(2),
+                    elevation: 8,
+                    borderRadius: theme.borderRadius.xl,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Custom Styled Card',
+                          style: theme.typography.titleMedium,
+                        ),
+                        SizedBox(height: theme.spacing.four),
+                        Text(
+                          'This card has custom padding, margin, elevation, and border radius.',
+                          style: theme.typography.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // List Tile section
+            SizedBox(height: theme.spacing.twentyFour),
+            Container(
+              width: double.infinity,
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'List Tile Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Basic List Tile
+                  Text(
+                    'Basic List Tile',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapListTile(
+                    leading: const Icon(Icons.person),
+                    title: Text('John Doe'),
+                    subtitle: Text('Software Engineer'),
+                    trailing: const Icon(Icons.chevron_right),
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Interactive List Tile
+                  Text(
+                    'Interactive List Tile',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapListTile(
+                    leading: const Icon(Icons.settings),
+                    title: Text('Settings'),
+                    subtitle: Text('App configuration'),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () {},
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Custom List Tile
+                  Text(
+                    'Custom List Tile',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: theme.primaryColor,
+                      child:
+                          const Icon(Icons.notifications, color: Colors.white),
+                    ),
+                    title: Text(
+                      'Notifications',
+                      style: theme.typography.titleMedium,
+                    ),
+                    subtitle: Text(
+                      'Manage your notification preferences',
+                      style: theme.typography.bodyMedium,
+                    ),
+                    trailing: Switch(
+                      value: true,
+                      onChanged: (value) {},
+                      activeColor: theme.primaryColor,
+                    ),
+                    showDivider: false,
+                    backgroundColor: theme.primaryColor.withOpacity(0.05),
+                  ),
+                ],
+              ),
+            ),
+
+            // Dialog section
+            SizedBox(height: theme.spacing.twentyFour),
+            Container(
+              width: double.infinity,
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Dialog Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Basic Dialog
+                  Text(
+                    'Basic Dialog',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => SnapDialog(
+                          title: Text(
+                            'Basic Dialog',
+                            style: theme.typography.titleLarge,
+                          ),
+                          content: Text(
+                            'This is a basic dialog with a title and content.',
+                            style: theme.typography.bodyMedium,
+                          ),
+                          actions: [
+                            SnapButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Cancel'),
+                            ),
+                            SizedBox(width: theme.spacing.four),
+                            SnapButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Confirm'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: const Text('Show Basic Dialog'),
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Custom Dialog
+                  Text(
+                    'Custom Dialog',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => SnapDialog(
+                          title: Row(
+                            children: [
+                              Icon(
+                                Icons.info_outline,
+                                color: theme.primaryColor,
+                              ),
+                              SizedBox(width: theme.spacing.four),
+                              Text(
+                                'Custom Dialog',
+                                style: theme.typography.titleLarge,
+                              ),
+                            ],
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'This is a custom dialog with:',
+                                style: theme.typography.bodyMedium,
+                              ),
+                              SizedBox(height: theme.spacing.four),
+                              SnapListTile(
+                                leading: const Icon(Icons.check_circle),
+                                title: Text('Custom title with icon'),
+                                showDivider: false,
+                              ),
+                              SnapListTile(
+                                leading: const Icon(Icons.check_circle),
+                                title: Text('Custom content layout'),
+                                showDivider: false,
+                              ),
+                              SnapListTile(
+                                leading: const Icon(Icons.check_circle),
+                                title: Text('Custom action buttons'),
+                                showDivider: false,
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            SnapButton(
+                              onPressed: () => Navigator.pop(context),
+                              variant: ButtonVariant.text,
+                              child: const Text('Cancel'),
+                            ),
+                            SizedBox(width: theme.spacing.four),
+                            SnapButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Save Changes'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    child: const Text('Show Custom Dialog'),
                   ),
                 ],
               ),
