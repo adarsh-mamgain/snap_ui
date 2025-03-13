@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:snap_ui/snap_ui.dart';
 import 'package:snap_ui/src/themes/theme.dart';
 
 void main() {
@@ -11,221 +10,284 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'SnapUI Demo',
-      home: MyHomePage(title: 'SnapUI Demo Home Page'),
+    return SnapUiThemeProvider(
+      theme: SnapUiTheme.lightTheme,
+      child: MaterialApp(
+        title: 'SnapUI Example',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          useMaterial3: true,
+        ),
+        home: const HomePage(),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  SnapUiTheme _currentTheme = SnapUiTheme.lightTheme;
-  bool _isDarkMode = false;
-
-  void _toggleTheme() {
-    setState(() {
-      _isDarkMode = !_isDarkMode;
-      _currentTheme =
-          _isDarkMode ? SnapUiTheme.darkTheme : SnapUiTheme.lightTheme;
-    });
-  }
-
-  void _showCustomThemeDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: SnapColors.white,
-        surfaceTintColor: Colors.transparent,
-        title: const Text('Custom Theme Example'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('This dialog demonstrates a custom theme'),
-              const SizedBox(height: 16),
-              SnapCard(
-                backgroundColor: SnapColors.purple[600]!,
-                borderRadius: SnapRadius.xl2,
-                padding: const EdgeInsets.all(SnapSpacing.md),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Custom themed card'),
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showTailwindUtilsDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: SnapColors.white,
-        surfaceTintColor: Colors.transparent,
-        title: const Text('Tailwind Utils Example'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('This dialog demonstrates the TailwindUtils class'),
-              const SizedBox(height: 16),
-              SnapCard(
-                backgroundColor: SnapColors.green[600]!,
-                borderRadius: SnapRadius.xl,
-                padding: const EdgeInsets.all(SnapSpacing.md),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Theme from Tailwind Classes',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'This card uses a theme created from Tailwind CSS class names',
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.all(SnapSpacing.md),
-                        decoration: BoxDecoration(
-                          color: SnapColors.green[800],
-                          borderRadius: SnapRadius.lg,
-                        ),
-                        child: const Text('Container with Tailwind classes'),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
-    );
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SnapUiThemeProvider(
-      theme: _currentTheme,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          surfaceTintColor: Colors.transparent,
-          title: Text(widget.title),
-          actions: [
-            IconButton(
-              icon: Icon(_isDarkMode ? Icons.light_mode : Icons.dark_mode),
-              onPressed: _toggleTheme,
+    final theme = SnapUiThemeProvider.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'SnapUI Components',
+          style: theme.typography.titleLarge,
+        ),
+        backgroundColor: theme.primaryColor,
+        foregroundColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        padding: theme.spacing.all(4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Typography Section
+            Container(
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Typography Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+
+                  // Display styles
+                  Text(
+                    'Display Large',
+                    style: theme.typography.displayLarge,
+                  ),
+                  SizedBox(height: theme.spacing.four),
+                  Text(
+                    'Display Medium',
+                    style: theme.typography.displayMedium,
+                  ),
+                  SizedBox(height: theme.spacing.four),
+                  Text(
+                    'Display Small',
+                    style: theme.typography.displaySmall,
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Headline styles
+                  Text(
+                    'Headline Large',
+                    style: theme.typography.headlineLarge,
+                  ),
+                  SizedBox(height: theme.spacing.four),
+                  Text(
+                    'Headline Medium',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.four),
+                  Text(
+                    'Headline Small',
+                    style: theme.typography.headlineSmall,
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Title styles
+                  Text(
+                    'Title Large',
+                    style: theme.typography.titleLarge,
+                  ),
+                  SizedBox(height: theme.spacing.three),
+                  Text(
+                    'Title Medium',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.three),
+                  Text(
+                    'Title Small',
+                    style: theme.typography.titleSmall,
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Body styles
+                  Text(
+                    'Body Large',
+                    style: theme.typography.bodyLarge,
+                  ),
+                  SizedBox(height: theme.spacing.two),
+                  Text(
+                    'Body Medium',
+                    style: theme.typography.bodyMedium,
+                  ),
+                  SizedBox(height: theme.spacing.two),
+                  Text(
+                    'Body Small',
+                    style: theme.typography.bodySmall,
+                  ),
+                  SizedBox(height: theme.spacing.six),
+
+                  // Label styles
+                  Text(
+                    'Label Large',
+                    style: theme.typography.labelLarge,
+                  ),
+                  SizedBox(height: theme.spacing.two),
+                  Text(
+                    'Label Medium',
+                    style: theme.typography.labelMedium,
+                  ),
+                  SizedBox(height: theme.spacing.two),
+                  Text(
+                    'Label Small',
+                    style: theme.typography.labelSmall,
+                  ),
+                ],
+              ),
+            ),
+
+            // Spacing section
+            SizedBox(height: theme.spacing.twelve),
+            Container(
+              width: double.infinity,
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Spacing Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Container(
+                    padding: theme.spacing.all(4),
+                    decoration: BoxDecoration(
+                      color: theme.primaryColor.withOpacity(0.1),
+                      borderRadius: theme.borderRadius.md,
+                    ),
+                    child: Text('Padding: 4 units'),
+                  ),
+                  SizedBox(height: theme.spacing.six),
+                  Container(
+                    padding: theme.spacing.all(8),
+                    decoration: BoxDecoration(
+                      color: theme.primaryColor.withOpacity(0.1),
+                      borderRadius: theme.borderRadius.md,
+                    ),
+                    child: Text('Padding: 8 units'),
+                  ),
+                ],
+              ),
+            ),
+
+            // Border Radius section
+            SizedBox(height: theme.spacing.twelve),
+            Container(
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Border Radius Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: theme.primaryColor.withOpacity(0.1),
+                          borderRadius: theme.borderRadius.sm,
+                        ),
+                        child: Center(child: Text('sm')),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: theme.primaryColor.withOpacity(0.1),
+                          borderRadius: theme.borderRadius.md,
+                        ),
+                        child: Center(child: Text('md')),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: theme.primaryColor.withOpacity(0.1),
+                          borderRadius: theme.borderRadius.lg,
+                        ),
+                        child: Center(child: Text('lg')),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // Shadow section
+            SizedBox(height: theme.spacing.twelve),
+            Container(
+              width: double.infinity,
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Shadow Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Container(
+                    padding: theme.spacing.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: theme.borderRadius.md,
+                      boxShadow: theme.shadows.sm,
+                    ),
+                    child: Text('Small Shadow'),
+                  ),
+                  SizedBox(height: theme.spacing.sixtyFour),
+                  Container(
+                    padding: theme.spacing.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: theme.borderRadius.md,
+                      boxShadow: theme.shadows.md,
+                    ),
+                    child: Text('Medium Shadow'),
+                  ),
+                  SizedBox(height: theme.spacing.sixtyFour),
+                  Container(
+                    padding: theme.spacing.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: theme.borderRadius.md,
+                      boxShadow: theme.shadows.lg,
+                    ),
+                    child: Text('Large Shadow'),
+                  ),
+                ],
+              ),
             ),
           ],
-        ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SnapCard(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const Text(
-                          'SnapUI Card',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'This card uses the current theme: ${_isDarkMode ? "Dark" : "Light"}',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                SnapElevatedCard(
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'SnapUI Elevated Card',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'This card has elevation',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SnapPrimaryButton(
-                      onPressed: () {},
-                      child: const Text('Primary'),
-                    ),
-                    SnapSecondaryButton(
-                      onPressed: () {},
-                      child: const Text('Secondary'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SnapTextButton(
-                      onPressed: _showCustomThemeDialog,
-                      child: const Text('Custom Theme'),
-                    ),
-                    SnapTextButton(
-                      onPressed: _showTailwindUtilsDialog,
-                      child: const Text('Tailwind Utils'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
