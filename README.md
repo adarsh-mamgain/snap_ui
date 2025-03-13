@@ -11,29 +11,125 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# SnapUI
+
+A modern Flutter UI components library inspired by Tailwind CSS v4, designed for building beautiful and consistent mobile applications.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- 🎨 Modern and clean design system
+- 🌙 Built-in light and dark theme support
+- 📱 Mobile-first components
+- 🎯 Easy to use and customize
+- 🎭 Consistent styling across components
+- 📦 Zero dependencies on other UI libraries
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add SnapUI to your `pubspec.yaml`:
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  snap_ui: ^0.1.0
 ```
 
-## Additional information
+## Quick Start
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+1. Wrap your app with `SnapUiThemeProvider`:
+
+```dart
+void main() {
+  runApp(
+    SnapUiThemeProvider(
+      theme: SnapUiTheme.lightTheme,
+      child: MyApp(),
+    ),
+  );
+}
+```
+
+2. Use SnapUI components:
+
+```dart
+SnapButton(
+  onPressed: () {},
+  child: Text('Click me'),
+)
+```
+
+## Theme System
+
+SnapUI provides a comprehensive theme system:
+
+```dart
+SnapUiThemeProvider(
+  theme: SnapUiTheme(
+    primaryColor: Colors.blue,
+    secondaryColor: Colors.blueAccent,
+    backgroundColor: Colors.white,
+    textColor: Colors.black,
+    borderColor: Colors.grey,
+    shadowColor: Colors.black,
+    typography: SnapThemeTypography.defaultTypography,
+    spacing: SnapThemeSpacing.defaultSpacing,
+    borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
+    shadows: SnapThemeShadows.defaultShadows,
+  ),
+  child: MyApp(),
+)
+```
+
+## Components
+
+### Buttons
+
+- Primary Button
+- Secondary Button
+- Text Button
+- Icon Button
+- Outlined Button
+
+### Input Fields
+
+- Text Input
+- Password Input
+- Search Input
+- Number Input
+- Date Input
+
+### Cards
+
+- Basic Card
+- Elevated Card
+- Interactive Card
+- List Card
+
+### Navigation
+
+- Bottom Navigation Bar
+- Tab Bar
+- App Bar
+- Drawer
+
+### Feedback
+
+- Snackbar
+- Toast
+- Dialog
+- Modal Bottom Sheet
+
+### Layout
+
+- Container
+- Row
+- Column
+- Stack
+- Grid
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
