@@ -13,6 +13,11 @@ class SnapUiTheme {
   final Color textColor;
   final Color borderColor;
   final Color shadowColor;
+  final Color successColor;
+  final Color warningColor;
+  final Color errorColor;
+  final Color infoColor;
+  final Color disabledColor;
   final SnapThemeTypography typography;
   final SnapThemeSpacing spacing;
   final SnapThemeBorderRadius borderRadius;
@@ -26,6 +31,11 @@ class SnapUiTheme {
     textColor: SnapColors.gray[900]!,
     borderColor: SnapColors.gray[200]!,
     shadowColor: SnapColors.gray[800]!,
+    successColor: SnapColors.green[500]!,
+    warningColor: SnapColors.yellow[500]!,
+    errorColor: SnapColors.red[500]!,
+    infoColor: SnapColors.blue[400]!,
+    disabledColor: SnapColors.gray[400]!,
     typography: SnapThemeTypography.defaultTypography,
     spacing: SnapThemeSpacing.defaultSpacing,
     borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
@@ -39,6 +49,11 @@ class SnapUiTheme {
     textColor: SnapColors.white,
     borderColor: SnapColors.gray[700]!,
     shadowColor: SnapColors.black,
+    successColor: SnapColors.green[400]!,
+    warningColor: SnapColors.yellow[400]!,
+    errorColor: SnapColors.red[400]!,
+    infoColor: SnapColors.blue[300]!,
+    disabledColor: SnapColors.gray[600]!,
     typography: SnapThemeTypography.defaultTypography,
     spacing: SnapThemeSpacing.defaultSpacing,
     borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
@@ -52,6 +67,11 @@ class SnapUiTheme {
     required this.textColor,
     required this.borderColor,
     required this.shadowColor,
+    required this.successColor,
+    required this.warningColor,
+    required this.errorColor,
+    required this.infoColor,
+    required this.disabledColor,
     required this.typography,
     required this.spacing,
     required this.borderRadius,
@@ -67,6 +87,11 @@ class SnapUiTheme {
     Color? textColor,
     Color? borderColor,
     Color? shadowColor,
+    Color? successColor,
+    Color? warningColor,
+    Color? errorColor,
+    Color? infoColor,
+    Color? disabledColor,
     SnapThemeTypography? typography,
     SnapThemeSpacing? spacing,
     SnapThemeBorderRadius? borderRadius,
@@ -80,6 +105,11 @@ class SnapUiTheme {
       textColor: textColor ?? this.textColor,
       borderColor: borderColor ?? this.borderColor,
       shadowColor: shadowColor ?? this.shadowColor,
+      successColor: successColor ?? this.successColor,
+      warningColor: warningColor ?? this.warningColor,
+      errorColor: errorColor ?? this.errorColor,
+      infoColor: infoColor ?? this.infoColor,
+      disabledColor: disabledColor ?? this.disabledColor,
       typography: typography ?? this.typography,
       spacing: spacing ?? this.spacing,
       borderRadius: borderRadius ?? this.borderRadius,
@@ -115,6 +145,11 @@ class SnapUiThemeProvider extends InheritedWidget {
           textColor: Colors.black,
           borderColor: Colors.grey,
           shadowColor: Colors.black,
+          successColor: Colors.green,
+          warningColor: Colors.yellow,
+          errorColor: Colors.red,
+          infoColor: Colors.blue,
+          disabledColor: Colors.grey,
           typography: SnapThemeTypography.defaultTypography,
           spacing: SnapThemeSpacing.defaultSpacing,
           borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
