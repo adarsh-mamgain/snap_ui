@@ -11,7 +11,7 @@ class SnapNumberInput extends SnapTextInput {
   final bool allowDecimal;
   final int? decimalPlaces;
 
-  const SnapNumberInput({
+  SnapNumberInput({
     super.key,
     super.controller,
     super.label,
@@ -36,28 +36,72 @@ class SnapNumberInput extends SnapTextInput {
                  : TextInputType.number,
          onChanged: (value) {
            if (value.isEmpty) return;
-
-           // Validate number format
-           if (!allowNegative && value.startsWith('-')) {
-             return;
-           }
-
-           if (!allowDecimal && value.contains('.')) {
-             return;
-           }
-
-           // Validate min/max
-           final number = double.tryParse(value);
-           if (number != null) {
-             if (min != null && number < min!) {
-               return;
-             }
-             if (max != null && number > max!) {
-               return;
-             }
-           }
+           _validateNumber(
+             value,
+             allowNegative: allowNegative,
+             allowDecimal: allowDecimal,
+             min: min,
+             max: max,
+           );
          },
        );
+
+  static void _validateNumber(
+    String value, {
+    required bool allowNegative,
+    required bool allowDecimal,
+    double? min,
+    double? max,
+  }) {
+    // Validate number format
+    if (!allowNegative && value.startsWith('-')) {
+      return;
+    }
+
+    if (!allowDecimal && value.contains('.')) {
+      return;
+    }
+
+    // Validate min/max
+    final number = double.tryParse(value);
+    if (number != null) {
+      if (min != null && number < min) {
+        return;
+      }
+      if (max != null && number > max) {
+        return;
+      }
+    }
+  }
+
+  EdgeInsets _getContentPadding() {
+    switch (size) {
+      case InputSize.small:
+        return const EdgeInsets.symmetric(horizontal: 12, vertical: 8);
+      case InputSize.medium:
+        return const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+      case InputSize.large:
+        return const EdgeInsets.symmetric(horizontal: 20, vertical: 16);
+    }
+  }
+
+  OutlineInputBorder _getBorder(
+    SnapUiTheme theme, {
+    bool isFocused = false,
+    bool isError = false,
+  }) {
+    final color =
+        isError
+            ? Colors.red
+            : isFocused
+            ? theme.primaryColor
+            : theme.borderColor;
+
+    return OutlineInputBorder(
+      borderRadius: theme.borderRadius.md,
+      borderSide: BorderSide(color: color, width: isFocused ? 2 : 1),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

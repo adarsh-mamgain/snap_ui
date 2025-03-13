@@ -2,44 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:snap_ui/src/themes/theme.dart';
 import 'text_input.dart';
 
-/// A specialized text input for search functionality
-class SnapSearchInput extends SnapTextInput {
-  final void Function(String)? onSearch;
-  final bool showClearButton;
-  final bool showSearchIcon;
-  final String? searchHint;
-  final Widget? prefix;
+/// A specialized text input for time selection
+class SnapTimeInput extends SnapTextInput {
+  final TimeOfDay? initialTime;
+  final void Function(TimeOfDay?)? onTimeSelected;
+  final String? timeFormat;
+  final bool showClockIcon;
 
-  SnapSearchInput({
+  SnapTimeInput({
     super.key,
     super.controller,
     super.label,
+    super.hint,
     super.error,
     super.helper,
     super.isDisabled = false,
-    super.isReadOnly = false,
+    super.isReadOnly = true,
     super.isRequired = false,
     super.variant = InputVariant.outlined,
     super.size = InputSize.medium,
-    this.onSearch,
-    this.showClearButton = true,
-    this.showSearchIcon = true,
-    this.searchHint,
-    this.prefix,
-  }) : super(
-         hint: searchHint ?? 'Search...',
-         prefix: prefix ?? (showSearchIcon ? const Icon(Icons.search) : null),
-         suffix:
-             showClearButton
-                 ? IconButton(
-                   icon: const Icon(Icons.clear),
-                   onPressed: () {
-                     controller?.clear();
-                   },
-                 )
-                 : null,
-         onSubmitted: onSearch,
-       );
+    this.initialTime,
+    this.onTimeSelected,
+    this.timeFormat,
+    this.showClockIcon = true,
+  }) : super(prefix: showClockIcon ? const Icon(Icons.access_time) : null);
+
+  Future<void> _showTimePicker(BuildContext context) async {
+    if (isDisabled) return;
+
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: initialTime ?? TimeOfDay.now(),
+    );
+
+    if (picked != null) {
+      final formattedTime = _formatTime(picked, context);
+      controller?.text = formattedTime;
+      onTimeSelected?.call(picked);
+    }
+  }
+
+  String _formatTime(TimeOfDay time, BuildContext context) {
+    if (timeFormat != null) {
+      // TODO: Implement custom time formatting
+      return time.toString();
+    }
+
+    return time.format(context);
+  }
 
   EdgeInsets _getContentPadding() {
     switch (size) {
@@ -90,19 +100,19 @@ class SnapSearchInput extends SnapTextInput {
           controller: controller,
           enabled: !isDisabled,
           readOnly: isReadOnly,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.search,
+          keyboardType: TextInputType.none,
+          textInputAction: TextInputAction.done,
           onChanged: onChanged,
-          onSubmitted: onSearch,
-          onTap: onTap,
+          onSubmitted: onSubmitted,
+          onTap: () => _showTimePicker(context),
           maxLines: 1,
-          showCursor: !isDisabled,
+          showCursor: false,
           style: theme.typography.bodyMedium.copyWith(
             color:
                 isDisabled ? theme.textColor.withOpacity(0.5) : theme.textColor,
           ),
           decoration: InputDecoration(
-            hintText: hint,
+            hintText: hint ?? 'Select time',
             hintStyle: theme.typography.bodyMedium.copyWith(
               color: theme.textColor.withOpacity(0.5),
             ),

@@ -31,23 +31,24 @@ class SnapDateInput extends SnapTextInput {
     this.showCalendarIcon = true,
   }) : super(
          prefix: showCalendarIcon ? const Icon(Icons.calendar_today) : null,
-         onTap: () async {
-           if (isDisabled) return;
-
-           final DateTime? picked = await showDatePicker(
-             context: context,
-             initialDate: initialDate ?? DateTime.now(),
-             firstDate: firstDate ?? DateTime(1900),
-             lastDate: lastDate ?? DateTime(2100),
-           );
-
-           if (picked != null) {
-             final formattedDate = _formatDate(picked);
-             controller?.text = formattedDate;
-             onDateSelected?.call(picked);
-           }
-         },
        );
+
+  Future<void> _showDatePicker(BuildContext context) async {
+    if (isDisabled) return;
+
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate ?? DateTime.now(),
+      firstDate: firstDate ?? DateTime(1900),
+      lastDate: lastDate ?? DateTime(2100),
+    );
+
+    if (picked != null) {
+      final formattedDate = _formatDate(picked);
+      controller?.text = formattedDate;
+      onDateSelected?.call(picked);
+    }
+  }
 
   String _formatDate(DateTime date) {
     if (dateFormat != null) {
@@ -56,6 +57,35 @@ class SnapDateInput extends SnapTextInput {
     }
 
     return '${date.day}/${date.month}/${date.year}';
+  }
+
+  EdgeInsets _getContentPadding() {
+    switch (size) {
+      case InputSize.small:
+        return const EdgeInsets.symmetric(horizontal: 12, vertical: 8);
+      case InputSize.medium:
+        return const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+      case InputSize.large:
+        return const EdgeInsets.symmetric(horizontal: 20, vertical: 16);
+    }
+  }
+
+  OutlineInputBorder _getBorder(
+    SnapUiTheme theme, {
+    bool isFocused = false,
+    bool isError = false,
+  }) {
+    final color =
+        isError
+            ? Colors.red
+            : isFocused
+            ? theme.primaryColor
+            : theme.borderColor;
+
+    return OutlineInputBorder(
+      borderRadius: theme.borderRadius.md,
+      borderSide: BorderSide(color: color, width: isFocused ? 2 : 1),
+    );
   }
 
   @override
@@ -82,7 +112,7 @@ class SnapDateInput extends SnapTextInput {
           textInputAction: TextInputAction.done,
           onChanged: onChanged,
           onSubmitted: onSubmitted,
-          onTap: onTap,
+          onTap: () => _showDatePicker(context),
           maxLines: 1,
           showCursor: false,
           style: theme.typography.bodyMedium.copyWith(
