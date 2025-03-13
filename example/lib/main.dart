@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_ui/src/themes/theme.dart';
+import 'package:snap_ui/src/components/buttons/buttons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -283,6 +284,192 @@ class HomePage extends StatelessWidget {
                       boxShadow: theme.shadows.lg,
                     ),
                     child: Text('Large Shadow'),
+                  ),
+                ],
+              ),
+            ),
+
+            // Button section
+            SizedBox(height: theme.spacing.twentyFour),
+            Container(
+              width: double.infinity,
+              padding: theme.spacing.all(6),
+              decoration: BoxDecoration(
+                color: theme.primaryColor.withOpacity(0.05),
+                borderRadius: theme.borderRadius.lg,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Button Examples',
+                    style: theme.typography.headlineMedium,
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Primary Buttons
+                  Text(
+                    'Primary Buttons',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Row(
+                    children: [
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Small'),
+                        size: ButtonSize.small,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Medium'),
+                        size: ButtonSize.medium,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Large'),
+                        size: ButtonSize.large,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Secondary Buttons
+                  Text(
+                    'Secondary Buttons',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Row(
+                    children: [
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Small'),
+                        variant: ButtonVariant.secondary,
+                        size: ButtonSize.small,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Medium'),
+                        variant: ButtonVariant.secondary,
+                        size: ButtonSize.medium,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Large'),
+                        variant: ButtonVariant.secondary,
+                        size: ButtonSize.large,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Outlined Buttons
+                  Text(
+                    'Outlined Buttons',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Row(
+                    children: [
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Small'),
+                        variant: ButtonVariant.outlined,
+                        size: ButtonSize.small,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Medium'),
+                        variant: ButtonVariant.outlined,
+                        size: ButtonSize.medium,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Large'),
+                        variant: ButtonVariant.outlined,
+                        size: ButtonSize.large,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Text Buttons
+                  Text(
+                    'Text Buttons',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Row(
+                    children: [
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Small'),
+                        variant: ButtonVariant.text,
+                        size: ButtonSize.small,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Medium'),
+                        variant: ButtonVariant.text,
+                        size: ButtonSize.medium,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Large'),
+                        variant: ButtonVariant.text,
+                        size: ButtonSize.large,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // States
+                  Text(
+                    'Button States',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  Row(
+                    children: [
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Normal'),
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Disabled'),
+                        isDisabled: true,
+                      ),
+                      SizedBox(width: theme.spacing.six),
+                      SnapButton(
+                        onPressed: () {},
+                        child: const Text('Loading'),
+                        isLoading: true,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: theme.spacing.sixteen),
+
+                  // Full Width
+                  Text(
+                    'Full Width Button',
+                    style: theme.typography.titleMedium,
+                  ),
+                  SizedBox(height: theme.spacing.eight),
+                  SnapButton(
+                    onPressed: () {},
+                    child: const Text('Full Width Button'),
+                    isFullWidth: true,
                   ),
                 ],
               ),
