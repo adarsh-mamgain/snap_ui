@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:snap_ui/src/config/snap_constants.dart';
+import 'package:snap_ui/src/themes/typography.dart';
+import 'package:snap_ui/src/themes/spacing.dart';
+import 'package:snap_ui/src/themes/border_radius.dart';
+import 'package:snap_ui/src/themes/shadows.dart';
 
+/// Main theme class for SnapUI
 class SnapUiTheme {
   final Color primaryColor;
   final Color secondaryColor;
@@ -8,43 +13,49 @@ class SnapUiTheme {
   final Color textColor;
   final Color borderColor;
   final Color shadowColor;
-  final EdgeInsets padding;
-  final BorderRadius borderRadius;
-  final Border? border;
-  final List<BoxShadow>? boxShadow;
-  final double elevation;
+  final SnapThemeTypography typography;
+  final SnapThemeSpacing spacing;
+  final SnapThemeBorderRadius borderRadius;
+  final SnapThemeShadows shadows;
   final bool usePrimaryColorForShadow;
 
   static final lightTheme = SnapUiTheme(
-    primaryColor: SnapColors.blue[500]!, // blue-500
-    secondaryColor: SnapColors.blue[200]!, // blue-200
+    primaryColor: SnapColors.blue[500]!,
+    secondaryColor: SnapColors.blue[200]!,
     backgroundColor: SnapColors.white,
-    textColor: SnapColors.gray[900]!, // gray-900
-    borderColor: SnapColors.gray[200]!, // gray-200
-    shadowColor: SnapColors.gray[800]!, // gray-800
+    textColor: SnapColors.gray[900]!,
+    borderColor: SnapColors.gray[200]!,
+    shadowColor: SnapColors.gray[800]!,
+    typography: SnapThemeTypography.defaultTypography,
+    spacing: SnapThemeSpacing.defaultSpacing,
+    borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
+    shadows: SnapThemeShadows.defaultShadows,
   );
 
   static final darkTheme = SnapUiTheme(
-    primaryColor: SnapColors.blue[400]!, // blue-400
-    secondaryColor: SnapColors.blue[800]!, // blue-800
-    backgroundColor: SnapColors.gray[900]!, // gray-900
+    primaryColor: SnapColors.blue[400]!,
+    secondaryColor: SnapColors.blue[800]!,
+    backgroundColor: SnapColors.gray[900]!,
     textColor: SnapColors.white,
-    borderColor: SnapColors.gray[700]!, // gray-700
+    borderColor: SnapColors.gray[700]!,
     shadowColor: SnapColors.black,
+    typography: SnapThemeTypography.defaultTypography,
+    spacing: SnapThemeSpacing.defaultSpacing,
+    borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
+    shadows: SnapThemeShadows.defaultShadows,
   );
 
   const SnapUiTheme({
-    this.primaryColor = const Color.fromRGBO(159, 174, 246, 1),
-    this.secondaryColor = const Color.fromRGBO(225, 231, 255, 1),
-    this.backgroundColor = Colors.white,
-    this.textColor = const Color.fromRGBO(54, 54, 54, 1),
-    this.borderColor = const Color.fromRGBO(237, 237, 237, 1),
-    this.shadowColor = const Color.fromRGBO(71, 71, 71, 1),
-    this.padding = const EdgeInsets.all(16),
-    this.borderRadius = const BorderRadius.all(Radius.circular(8)),
-    this.border,
-    this.boxShadow,
-    this.elevation = 1,
+    required this.primaryColor,
+    required this.secondaryColor,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.borderColor,
+    required this.shadowColor,
+    required this.typography,
+    required this.spacing,
+    required this.borderRadius,
+    required this.shadows,
     this.usePrimaryColorForShadow = false,
   });
 
@@ -56,11 +67,10 @@ class SnapUiTheme {
     Color? textColor,
     Color? borderColor,
     Color? shadowColor,
-    EdgeInsets? padding,
-    BorderRadius? borderRadius,
-    Border? border,
-    List<BoxShadow>? boxShadow,
-    double? elevation,
+    SnapThemeTypography? typography,
+    SnapThemeSpacing? spacing,
+    SnapThemeBorderRadius? borderRadius,
+    SnapThemeShadows? shadows,
     bool? usePrimaryColorForShadow,
   }) {
     return SnapUiTheme(
@@ -70,11 +80,10 @@ class SnapUiTheme {
       textColor: textColor ?? this.textColor,
       borderColor: borderColor ?? this.borderColor,
       shadowColor: shadowColor ?? this.shadowColor,
-      padding: padding ?? this.padding,
+      typography: typography ?? this.typography,
+      spacing: spacing ?? this.spacing,
       borderRadius: borderRadius ?? this.borderRadius,
-      border: border ?? this.border,
-      boxShadow: boxShadow ?? this.boxShadow,
-      elevation: elevation ?? this.elevation,
+      shadows: shadows ?? this.shadows,
       usePrimaryColorForShadow:
           usePrimaryColorForShadow ?? this.usePrimaryColorForShadow,
     );
@@ -83,62 +92,6 @@ class SnapUiTheme {
   /// Get shadow color based on configuration
   Color get effectiveShadowColor =>
       usePrimaryColorForShadow ? primaryColor : shadowColor;
-
-  /// Get box shadow based on elevation and shadow color
-  List<BoxShadow> get effectiveBoxShadow {
-    if (boxShadow != null) return boxShadow!;
-
-    final color = effectiveShadowColor;
-
-    switch (elevation.round()) {
-      case 0:
-        return [];
-      case 1:
-        return [
-          BoxShadow(
-            color: color.withValues(alpha: 0.05),
-            offset: const Offset(0, 1),
-            blurRadius: 2,
-          ),
-        ];
-      case 2:
-        return [
-          BoxShadow(
-            color: color.withValues(alpha: 0.1),
-            offset: const Offset(0, 4),
-            blurRadius: 6,
-            spreadRadius: -1,
-          ),
-        ];
-      case 3:
-        return [
-          BoxShadow(
-            color: color.withValues(alpha: 0.1),
-            offset: const Offset(0, 10),
-            blurRadius: 15,
-            spreadRadius: -3,
-          ),
-        ];
-      case 4:
-        return [
-          BoxShadow(
-            color: color.withValues(alpha: 0.1),
-            offset: const Offset(0, 20),
-            blurRadius: 25,
-            spreadRadius: -5,
-          ),
-        ];
-      default:
-        return [
-          BoxShadow(
-            color: color.withValues(alpha: 0.25),
-            offset: const Offset(0, 25),
-            blurRadius: 50,
-            spreadRadius: -12,
-          ),
-        ];
-    }
-  }
 }
 
 /// Provider for SnapUiTheme
@@ -154,7 +107,19 @@ class SnapUiThemeProvider extends InheritedWidget {
   static SnapUiTheme of(BuildContext context) {
     final provider =
         context.dependOnInheritedWidgetOfExactType<SnapUiThemeProvider>();
-    return provider?.theme ?? const SnapUiTheme();
+    return provider?.theme ??
+        SnapUiTheme(
+          primaryColor: Colors.blue,
+          secondaryColor: Colors.blueAccent,
+          backgroundColor: Colors.white,
+          textColor: Colors.black,
+          borderColor: Colors.grey,
+          shadowColor: Colors.black,
+          typography: SnapThemeTypography.defaultTypography,
+          spacing: SnapThemeSpacing.defaultSpacing,
+          borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
+          shadows: SnapThemeShadows.defaultShadows,
+        );
   }
 
   @override
