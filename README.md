@@ -13,123 +13,103 @@ and the Flutter guide for
 
 # SnapUI
 
-A modern Flutter UI components library inspired by Tailwind CSS v4, designed for building beautiful and consistent mobile applications.
+A modern, customizable Flutter UI component library that provides a comprehensive set of pre-built components following Material Design principles.
 
 ## Features
 
-- 🎨 Modern and clean design system
-- 🌙 Built-in light and dark theme support
-- 📱 Mobile-first components
-- 🎯 Easy to use and customize
-- 🎭 Consistent styling across components
+- 🎨 Modern and clean design
+- 🎯 Highly customizable components
+- 📱 Responsive and adaptive
+- 🎭 Dark mode support
+- 🎨 Consistent theming system
 - 📦 Zero dependencies on other UI libraries
 
 ## Installation
 
-Add SnapUI to your `pubspec.yaml`:
+Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  snap_ui: ^0.1.0
+  snap_ui:
+    git:
+      url: https://github.com/yourusername/snap_ui.git
+      ref: main
 ```
 
 ## Quick Start
 
-1. Wrap your app with `SnapUiThemeProvider`:
-
 ```dart
+import 'package:snap_ui/snap_ui.dart';
+
 void main() {
-  runApp(
-    SnapUiThemeProvider(
-      theme: SnapUiTheme.lightTheme,
-      child: MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
-```
 
-2. Use SnapUI components:
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-```dart
-SnapButton(
-  onPressed: () {},
-  child: Text('Click me'),
-)
-```
-
-## Theme System
-
-SnapUI provides a comprehensive theme system:
-
-```dart
-SnapUiThemeProvider(
-  theme: SnapUiTheme(
-    primaryColor: Colors.blue,
-    secondaryColor: Colors.blueAccent,
-    backgroundColor: Colors.white,
-    textColor: Colors.black,
-    borderColor: Colors.grey,
-    shadowColor: Colors.black,
-    typography: SnapThemeTypography.defaultTypography,
-    spacing: SnapThemeSpacing.defaultSpacing,
-    borderRadius: SnapThemeBorderRadius.defaultBorderRadius,
-    shadows: SnapThemeShadows.defaultShadows,
-  ),
-  child: MyApp(),
-)
+  @override
+  Widget build(BuildContext context) {
+    return SnapUiThemeProvider(
+      theme: SnapUiTheme.lightTheme,
+      child: MaterialApp(
+        home: Scaffold(
+          body: SnapButton(
+            onPressed: () {},
+            child: const Text('Click me'),
+          ),
+        ),
+      ),
+    );
+  }
+}
 ```
 
 ## Components
 
-### Buttons
+### Basic Components
 
-- Primary Button
-- Secondary Button
-- Text Button
-- Icon Button
-- Outlined Button
+- Buttons
+- Text Inputs
+- Cards
+- List Tiles
+- Dialogs
 
-### Input Fields
+### Advanced Components
 
-- Text Input
-- Password Input
-- Search Input
-- Number Input
-- Date Input
+- Chips
+- Badges
+- Avatars
+- Progress Indicators
+- Tooltips
+- Dividers
+- Accordions
 
-### Cards
+## Theming
 
-- Basic Card
-- Elevated Card
-- Interactive Card
-- List Card
+SnapUI provides a flexible theming system that allows you to customize the look and feel of all components:
 
-### Navigation
+```dart
+final customTheme = SnapUiTheme(
+  primaryColor: Colors.blue,
+  secondaryColor: Colors.green,
+  // ... other theme properties
+);
 
-- Bottom Navigation Bar
-- Tab Bar
-- App Bar
-- Drawer
-
-### Feedback
-
-- Snackbar
-- Toast
-- Dialog
-- Modal Bottom Sheet
-
-### Layout
-
-- Container
-- Row
-- Column
-- Stack
-- Grid
+SnapUiThemeProvider(
+  theme: customTheme,
+  child: MaterialApp(...),
+)
+```
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+If you encounter any issues or have questions, please file an issue on the GitHub repository.
