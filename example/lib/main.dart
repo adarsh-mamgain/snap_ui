@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:snap_ui/snap_ui.dart';
-import 'package:snap_ui/src/themes/theme.dart';
-import 'package:snap_ui/src/components/buttons/buttons.dart';
-import 'package:snap_ui/src/components/inputs/inputs.dart';
-import 'package:snap_ui/src/components/cards/cards.dart';
-import 'package:snap_ui/src/components/lists/lists.dart';
-import 'package:snap_ui/src/components/dialogs/dialogs.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,7 +49,7 @@ class HomePage extends StatelessWidget {
             Container(
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -160,7 +154,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -174,19 +168,19 @@ class HomePage extends StatelessWidget {
                   Container(
                     padding: theme.spacing.all(4),
                     decoration: BoxDecoration(
-                      color: theme.primaryColor.withOpacity(0.1),
+                      color: theme.primaryColor.withValues(alpha: 128),
                       borderRadius: theme.borderRadius.md,
                     ),
-                    child: Text('Padding: 4 units'),
+                    child: const Text('Padding: 4 units'),
                   ),
                   SizedBox(height: theme.spacing.six),
                   Container(
                     padding: theme.spacing.all(8),
                     decoration: BoxDecoration(
-                      color: theme.primaryColor.withOpacity(0.1),
+                      color: theme.primaryColor.withValues(alpha: 128),
                       borderRadius: theme.borderRadius.md,
                     ),
-                    child: Text('Padding: 8 units'),
+                    child: const Text('Padding: 8 units'),
                   ),
                 ],
               ),
@@ -197,7 +191,7 @@ class HomePage extends StatelessWidget {
             Container(
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -215,28 +209,28 @@ class HomePage extends StatelessWidget {
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: theme.primaryColor.withOpacity(0.1),
+                          color: theme.primaryColor.withValues(alpha: 128),
                           borderRadius: theme.borderRadius.sm,
                         ),
-                        child: Center(child: Text('sm')),
+                        child: const Center(child: Text('sm')),
                       ),
                       Container(
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: theme.primaryColor.withOpacity(0.1),
+                          color: theme.primaryColor.withValues(alpha: 128),
                           borderRadius: theme.borderRadius.md,
                         ),
-                        child: Center(child: Text('md')),
+                        child: const Center(child: Text('md')),
                       ),
                       Container(
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: theme.primaryColor.withOpacity(0.1),
+                          color: theme.primaryColor.withValues(alpha: 128),
                           borderRadius: theme.borderRadius.lg,
                         ),
-                        child: Center(child: Text('lg')),
+                        child: const Center(child: Text('lg')),
                       ),
                     ],
                   ),
@@ -250,7 +244,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -268,7 +262,7 @@ class HomePage extends StatelessWidget {
                       borderRadius: theme.borderRadius.md,
                       boxShadow: theme.shadows.sm,
                     ),
-                    child: Text('Small Shadow'),
+                    child: const Text('Small Shadow'),
                   ),
                   SizedBox(height: theme.spacing.sixtyFour),
                   Container(
@@ -278,7 +272,7 @@ class HomePage extends StatelessWidget {
                       borderRadius: theme.borderRadius.md,
                       boxShadow: theme.shadows.md,
                     ),
-                    child: Text('Medium Shadow'),
+                    child: const Text('Medium Shadow'),
                   ),
                   SizedBox(height: theme.spacing.sixtyFour),
                   Container(
@@ -288,7 +282,7 @@ class HomePage extends StatelessWidget {
                       borderRadius: theme.borderRadius.md,
                       boxShadow: theme.shadows.lg,
                     ),
-                    child: Text('Large Shadow'),
+                    child: const Text('Large Shadow'),
                   ),
                 ],
               ),
@@ -300,7 +294,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -322,20 +316,20 @@ class HomePage extends StatelessWidget {
                     children: [
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Small'),
                         size: ButtonSize.small,
+                        child: const Text('Small'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Medium'),
                         size: ButtonSize.medium,
+                        child: const Text('Medium'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Large'),
                         size: ButtonSize.large,
+                        child: const Text('Large'),
                       ),
                     ],
                   ),
@@ -351,23 +345,23 @@ class HomePage extends StatelessWidget {
                     children: [
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Small'),
                         variant: ButtonVariant.secondary,
                         size: ButtonSize.small,
+                        child: const Text('Small'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Medium'),
                         variant: ButtonVariant.secondary,
                         size: ButtonSize.medium,
+                        child: const Text('Medium'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Large'),
                         variant: ButtonVariant.secondary,
                         size: ButtonSize.large,
+                        child: const Text('Large'),
                       ),
                     ],
                   ),
@@ -383,23 +377,23 @@ class HomePage extends StatelessWidget {
                     children: [
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Small'),
                         variant: ButtonVariant.outlined,
                         size: ButtonSize.small,
+                        child: const Text('Small'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Medium'),
                         variant: ButtonVariant.outlined,
                         size: ButtonSize.medium,
+                        child: const Text('Medium'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Large'),
                         variant: ButtonVariant.outlined,
                         size: ButtonSize.large,
+                        child: const Text('Large'),
                       ),
                     ],
                   ),
@@ -415,23 +409,23 @@ class HomePage extends StatelessWidget {
                     children: [
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Small'),
                         variant: ButtonVariant.text,
                         size: ButtonSize.small,
+                        child: const Text('Small'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Medium'),
                         variant: ButtonVariant.text,
                         size: ButtonSize.medium,
+                        child: const Text('Medium'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Large'),
                         variant: ButtonVariant.text,
                         size: ButtonSize.large,
+                        child: const Text('Large'),
                       ),
                     ],
                   ),
@@ -452,14 +446,14 @@ class HomePage extends StatelessWidget {
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Disabled'),
                         isDisabled: true,
+                        child: const Text('Disabled'),
                       ),
                       SizedBox(width: theme.spacing.six),
                       SnapButton(
                         onPressed: () {},
-                        child: const Text('Loading'),
                         isLoading: true,
+                        child: const Text('Loading'),
                       ),
                     ],
                   ),
@@ -473,8 +467,8 @@ class HomePage extends StatelessWidget {
                   SizedBox(height: theme.spacing.eight),
                   SnapButton(
                     onPressed: () {},
-                    child: const Text('Full Width Button'),
                     isFullWidth: true,
+                    child: const Text('Full Width Button'),
                   ),
                 ],
               ),
@@ -486,7 +480,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -504,18 +498,18 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Label',
                     hint: 'Placeholder text',
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Required Input',
                     hint: 'This field is required',
                     isRequired: true,
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Disabled Input',
                     hint: 'This input is disabled',
                     isDisabled: true,
@@ -528,13 +522,13 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Outlined Input',
                     hint: 'Default outlined style',
                     variant: InputVariant.outlined,
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Filled Input',
                     hint: 'Filled style input',
                     variant: InputVariant.filled,
@@ -547,19 +541,19 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Small Input',
                     hint: 'Small size input',
                     size: InputSize.small,
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Medium Input',
                     hint: 'Medium size input (default)',
                     size: InputSize.medium,
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Large Input',
                     hint: 'Large size input',
                     size: InputSize.large,
@@ -572,13 +566,13 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Error Input',
                     hint: 'This input has an error',
                     error: 'This field is required',
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Helper Text Input',
                     hint: 'This input has helper text',
                     helper: 'This is a helper message',
@@ -601,13 +595,13 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Email Input',
                     hint: 'Enter your email',
                     keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Phone Input',
                     hint: 'Enter your phone number',
                     keyboardType: TextInputType.phone,
@@ -620,10 +614,10 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Search Input',
                     hint: 'Search...',
-                    prefix: const Icon(Icons.search),
+                    prefix: Icon(Icons.search),
                   ),
                   SizedBox(height: theme.spacing.six),
                   SnapTextInput(
@@ -643,14 +637,14 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Text Area',
                     hint: 'Enter multiple lines of text',
                     maxLines: 3,
                     minLines: 3,
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapTextInput(
+                  const SnapTextInput(
                     label: 'Character Limited Input',
                     hint: 'Enter text (max 100 characters)',
                     maxLength: 100,
@@ -711,8 +705,7 @@ class HomePage extends StatelessWidget {
                   SnapSearchInput(
                     label: 'Custom Search',
                     searchHint: 'Search with custom icon',
-                    showSearchIcon: false,
-                    prefix: const Icon(Icons.search),
+                    showSearchIcon: true,
                     variant: InputVariant.filled,
                   ),
                   SizedBox(height: theme.spacing.sixteen),
@@ -740,7 +733,7 @@ class HomePage extends StatelessWidget {
                     dateFormat: 'dd/MM/yyyy',
                   ),
                   SizedBox(height: theme.spacing.six),
-                  SnapDateInput(
+                  const SnapDateInput(
                     label: 'Disabled Date Picker',
                     hint: 'This date picker is disabled',
                     isDisabled: true,
@@ -756,7 +749,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -774,7 +767,7 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapCard(
+                  const SnapCard(
                     child: Text('This is a basic card with default styling'),
                   ),
                   SizedBox(height: theme.spacing.six),
@@ -788,7 +781,7 @@ class HomePage extends StatelessWidget {
                   SnapCard(
                     isInteractive: true,
                     onTap: () {},
-                    child: Text('Tap me!'),
+                    child: const Text('Tap me!'),
                   ),
                   SizedBox(height: theme.spacing.six),
 
@@ -799,7 +792,7 @@ class HomePage extends StatelessWidget {
                   ),
                   SizedBox(height: theme.spacing.eight),
                   SnapCard(
-                    backgroundColor: theme.primaryColor.withOpacity(0.1),
+                    backgroundColor: theme.primaryColor.withValues(alpha: 128),
                     padding: theme.spacing.all(8),
                     margin: theme.spacing.all(2),
                     elevation: 8,
@@ -829,7 +822,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -847,11 +840,11 @@ class HomePage extends StatelessWidget {
                     style: theme.typography.titleMedium,
                   ),
                   SizedBox(height: theme.spacing.eight),
-                  SnapListTile(
-                    leading: const Icon(Icons.person),
+                  const SnapListTile(
+                    leading: Icon(Icons.person),
                     title: Text('John Doe'),
                     subtitle: Text('Software Engineer'),
-                    trailing: const Icon(Icons.chevron_right),
+                    trailing: Icon(Icons.chevron_right),
                   ),
                   SizedBox(height: theme.spacing.six),
 
@@ -863,8 +856,8 @@ class HomePage extends StatelessWidget {
                   SizedBox(height: theme.spacing.eight),
                   SnapListTile(
                     leading: const Icon(Icons.settings),
-                    title: Text('Settings'),
-                    subtitle: Text('App configuration'),
+                    title: const Text('Settings'),
+                    subtitle: const Text('App configuration'),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () {},
                   ),
@@ -896,7 +889,7 @@ class HomePage extends StatelessWidget {
                       activeColor: theme.primaryColor,
                     ),
                     showDivider: false,
-                    backgroundColor: theme.primaryColor.withOpacity(0.05),
+                    backgroundColor: theme.primaryColor.withValues(alpha: 128),
                   ),
                 ],
               ),
@@ -908,7 +901,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               padding: theme.spacing.all(6),
               decoration: BoxDecoration(
-                color: theme.primaryColor.withOpacity(0.05),
+                color: theme.primaryColor.withValues(alpha: 128),
                 borderRadius: theme.borderRadius.lg,
               ),
               child: Column(
@@ -990,18 +983,18 @@ class HomePage extends StatelessWidget {
                                 style: theme.typography.bodyMedium,
                               ),
                               SizedBox(height: theme.spacing.four),
-                              SnapListTile(
-                                leading: const Icon(Icons.check_circle),
+                              const SnapListTile(
+                                leading: Icon(Icons.check_circle),
                                 title: Text('Custom title with icon'),
                                 showDivider: false,
                               ),
-                              SnapListTile(
-                                leading: const Icon(Icons.check_circle),
+                              const SnapListTile(
+                                leading: Icon(Icons.check_circle),
                                 title: Text('Custom content layout'),
                                 showDivider: false,
                               ),
-                              SnapListTile(
-                                leading: const Icon(Icons.check_circle),
+                              const SnapListTile(
+                                leading: Icon(Icons.check_circle),
                                 title: Text('Custom action buttons'),
                                 showDivider: false,
                               ),
