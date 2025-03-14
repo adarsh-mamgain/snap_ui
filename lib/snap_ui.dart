@@ -18,6 +18,3 @@ export 'src/components/progress/progress.dart';
 export 'src/components/tooltips/tooltips.dart';
 export 'src/components/dividers/dividers.dart';
 export 'src/components/accordions/accordions.dart';
-
-// Export examples
-export 'src/examples/config_example.dart';
