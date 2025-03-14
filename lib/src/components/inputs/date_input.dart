@@ -27,6 +27,13 @@ class SnapDateInput extends SnapTextInput {
     this.firstDate,
     this.lastDate,
     this.onDateSelected,
+
+    /// The format to display the date in. Supported formats:
+    /// - 'dd/MM/yyyy' - 24 hour format (e.g. '23:59')
+    /// - 'MM/dd/yyyy' - 12 hour format with AM/PM (e.g. '11:59 PM')
+    /// - 'yyyy/MM/dd' - 12 hour format without leading zero (e.g. '9:59 AM')
+    /// - 'yyyy/dd/MM' - 24 hour format with seconds (e.g. '23:59:59')
+    /// - 'yyyy/MM/dd' - 12 hour format with seconds (e.g. '11:59:59 PM')
     this.dateFormat,
     this.showCalendarIcon = true,
   }) : super(
@@ -52,8 +59,11 @@ class SnapDateInput extends SnapTextInput {
 
   String _formatDate(DateTime date) {
     if (dateFormat != null) {
-      // TODO: Implement custom date formatting
-      return date.toString();
+      return dateFormat!
+          .replaceAll('dd', date.day.toString().padLeft(2, '0'))
+          .replaceAll('MM', date.month.toString().padLeft(2, '0'))
+          .replaceAll('yyyy', date.year.toString())
+          .replaceAll('yy', date.year.toString().substring(2));
     }
 
     return '${date.day}/${date.month}/${date.year}';

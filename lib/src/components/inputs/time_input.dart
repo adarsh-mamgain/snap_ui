@@ -6,6 +6,13 @@ import 'text_input.dart';
 class SnapTimeInput extends SnapTextInput {
   final TimeOfDay? initialTime;
   final void Function(TimeOfDay?)? onTimeSelected;
+
+  /// The format to display the time in. Supported formats:
+  /// - 'HH:mm' - 24 hour format (e.g. '23:59')
+  /// - 'hh:mm a' - 12 hour format with AM/PM (e.g. '11:59 PM')
+  /// - 'h:mm a' - 12 hour format without leading zero (e.g. '9:59 AM')
+  /// - 'HH:mm:ss' - 24 hour format with seconds (e.g. '23:59:59')
+  /// - 'hh:mm:ss a' - 12 hour format with seconds (e.g. '11:59:59 PM')
   final String? timeFormat;
   final bool showClockIcon;
 
@@ -44,8 +51,14 @@ class SnapTimeInput extends SnapTextInput {
 
   String _formatTime(TimeOfDay time, BuildContext context) {
     if (timeFormat != null) {
-      // TODO: Implement custom time formatting
-      return time.toString();
+      final hour = time.hour.toString().padLeft(2, '0');
+      final minute = time.minute.toString().padLeft(2, '0');
+      final period = time.period == DayPeriod.am ? 'AM' : 'PM';
+
+      return timeFormat!
+          .replaceAll('HH', hour)
+          .replaceAll('mm', minute)
+          .replaceAll('a', period);
     }
 
     return time.format(context);
