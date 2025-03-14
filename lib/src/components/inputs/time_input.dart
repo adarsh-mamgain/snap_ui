@@ -6,10 +6,17 @@ import 'text_input.dart';
 class SnapTimeInput extends SnapTextInput {
   final TimeOfDay? initialTime;
   final void Function(TimeOfDay?)? onTimeSelected;
+
+  /// The format to display the time in. Supported formats:
+  /// - 'HH:mm' - 24 hour format (e.g. '23:59')
+  /// - 'hh:mm a' - 12 hour format with AM/PM (e.g. '11:59 PM')
+  /// - 'h:mm a' - 12 hour format without leading zero (e.g. '9:59 AM')
+  /// - 'HH:mm:ss' - 24 hour format with seconds (e.g. '23:59:59')
+  /// - 'hh:mm:ss a' - 12 hour format with seconds (e.g. '11:59:59 PM')
   final String? timeFormat;
   final bool showClockIcon;
 
-  SnapTimeInput({
+  const SnapTimeInput({
     super.key,
     super.controller,
     super.label,
@@ -35,7 +42,7 @@ class SnapTimeInput extends SnapTextInput {
       initialTime: initialTime ?? TimeOfDay.now(),
     );
 
-    if (picked != null) {
+    if (picked != null && context.mounted) {
       final formattedTime = _formatTime(picked, context);
       controller?.text = formattedTime;
       onTimeSelected?.call(picked);
@@ -44,8 +51,14 @@ class SnapTimeInput extends SnapTextInput {
 
   String _formatTime(TimeOfDay time, BuildContext context) {
     if (timeFormat != null) {
-      // TODO: Implement custom time formatting
-      return time.toString();
+      final hour = time.hour.toString().padLeft(2, '0');
+      final minute = time.minute.toString().padLeft(2, '0');
+      final period = time.period == DayPeriod.am ? 'AM' : 'PM';
+
+      return timeFormat!
+          .replaceAll('HH', hour)
+          .replaceAll('mm', minute)
+          .replaceAll('a', period);
     }
 
     return time.format(context);
@@ -109,12 +122,12 @@ class SnapTimeInput extends SnapTextInput {
           showCursor: false,
           style: theme.typography.bodyMedium.copyWith(
             color:
-                isDisabled ? theme.textColor.withOpacity(0.5) : theme.textColor,
+                isDisabled ? theme.textColor.withAlpha(128) : theme.textColor,
           ),
           decoration: InputDecoration(
             hintText: hint ?? 'Select time',
             hintStyle: theme.typography.bodyMedium.copyWith(
-              color: theme.textColor.withOpacity(0.5),
+              color: theme.textColor.withAlpha(128),
             ),
             prefixIcon: prefix,
             suffixIcon: suffix,
@@ -132,9 +145,9 @@ class SnapTimeInput extends SnapTextInput {
             filled: variant == InputVariant.filled,
             fillColor:
                 isDisabled
-                    ? theme.backgroundColor.withOpacity(0.5)
+                    ? theme.backgroundColor.withAlpha(128)
                     : variant == InputVariant.filled
-                    ? theme.backgroundColor.withOpacity(0.05)
+                    ? theme.backgroundColor.withAlpha(13)
                     : null,
             counterText: '',
           ),
@@ -151,7 +164,7 @@ class SnapTimeInput extends SnapTextInput {
           Text(
             helper!,
             style: theme.typography.labelSmall.copyWith(
-              color: theme.textColor.withOpacity(0.7),
+              color: theme.textColor.withAlpha(128),
             ),
           ),
         ],

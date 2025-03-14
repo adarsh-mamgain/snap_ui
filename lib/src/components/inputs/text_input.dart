@@ -55,7 +55,6 @@ class SnapTextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = SnapUiThemeProvider.of(context);
-    final effectiveStyle = _getInputStyle(theme);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,12 +84,12 @@ class SnapTextInput extends StatelessWidget {
           showCursor: !isDisabled,
           style: theme.typography.bodyMedium.copyWith(
             color:
-                isDisabled ? theme.textColor.withOpacity(0.5) : theme.textColor,
+                isDisabled ? theme.textColor.withAlpha(128) : theme.textColor,
           ),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: theme.typography.bodyMedium.copyWith(
-              color: theme.textColor.withOpacity(0.5),
+              color: theme.textColor.withAlpha(128),
             ),
             prefixIcon: prefix,
             suffixIcon: suffix,
@@ -108,9 +107,9 @@ class SnapTextInput extends StatelessWidget {
             filled: variant == InputVariant.filled,
             fillColor:
                 isDisabled
-                    ? theme.backgroundColor.withOpacity(0.5)
+                    ? theme.backgroundColor.withAlpha(128)
                     : variant == InputVariant.filled
-                    ? theme.backgroundColor.withOpacity(0.05)
+                    ? theme.backgroundColor.withAlpha(13)
                     : null,
             counterText: showCounter ? null : '',
           ),
@@ -127,28 +126,11 @@ class SnapTextInput extends StatelessWidget {
           Text(
             helper!,
             style: theme.typography.labelSmall.copyWith(
-              color: theme.textColor.withOpacity(0.7),
+              color: theme.textColor.withAlpha(128),
             ),
           ),
         ],
       ],
-    );
-  }
-
-  InputDecoration? _getInputStyle(SnapUiTheme theme) {
-    return InputDecoration(
-      border: _getBorder(theme),
-      enabledBorder: _getBorder(theme),
-      focusedBorder: _getBorder(theme, isFocused: true),
-      errorBorder: _getBorder(theme, isError: true),
-      focusedErrorBorder: _getBorder(theme, isError: true, isFocused: true),
-      filled: variant == InputVariant.filled,
-      fillColor:
-          isDisabled
-              ? theme.backgroundColor.withOpacity(0.5)
-              : variant == InputVariant.filled
-              ? theme.backgroundColor.withOpacity(0.05)
-              : null,
     );
   }
 

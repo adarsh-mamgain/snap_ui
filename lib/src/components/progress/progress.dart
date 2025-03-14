@@ -37,7 +37,7 @@ class SnapProgress extends StatelessWidget {
     final theme = SnapUiThemeProvider.of(context);
     final effectiveColor = color ?? theme.primaryColor;
     final effectiveBackgroundColor =
-        backgroundColor ?? theme.primaryColor.withOpacity(0.1);
+        backgroundColor ?? theme.primaryColor.withValues(alpha: 128);
     final effectiveStrokeWidth = _getStrokeWidth(theme);
     final effectiveSize = _getSize(theme);
 

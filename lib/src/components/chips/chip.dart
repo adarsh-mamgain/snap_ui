@@ -95,10 +95,10 @@ class SnapChip extends StatelessWidget {
 
   Color _getBackgroundColor(SnapUiTheme theme) {
     if (backgroundColor != null) return backgroundColor!;
-    if (isDisabled) return theme.disabledColor.withOpacity(0.1);
+    if (isDisabled) return theme.disabledColor.withAlpha(128);
     if (isSelected) return theme.primaryColor;
     if (variant == ChipVariant.filled) {
-      return theme.primaryColor.withOpacity(0.1);
+      return theme.primaryColor.withAlpha(128);
     }
     return Colors.transparent;
   }

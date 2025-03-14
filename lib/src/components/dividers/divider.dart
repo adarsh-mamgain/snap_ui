@@ -53,7 +53,7 @@ class SnapDivider extends StatelessWidget {
                 EdgeInsets.symmetric(horizontal: theme.spacing.three),
             child: DefaultTextStyle(
               style: theme.typography.labelMedium.copyWith(
-                color: theme.textColor.withOpacity(0.6),
+                color: theme.textColor.withAlpha(128),
               ),
               child: label!,
             ),

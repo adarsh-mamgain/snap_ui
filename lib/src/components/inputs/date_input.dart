@@ -27,6 +27,13 @@ class SnapDateInput extends SnapTextInput {
     this.firstDate,
     this.lastDate,
     this.onDateSelected,
+
+    /// The format to display the date in. Supported formats:
+    /// - 'dd/MM/yyyy' - 24 hour format (e.g. '23:59')
+    /// - 'MM/dd/yyyy' - 12 hour format with AM/PM (e.g. '11:59 PM')
+    /// - 'yyyy/MM/dd' - 12 hour format without leading zero (e.g. '9:59 AM')
+    /// - 'yyyy/dd/MM' - 24 hour format with seconds (e.g. '23:59:59')
+    /// - 'yyyy/MM/dd' - 12 hour format with seconds (e.g. '11:59:59 PM')
     this.dateFormat,
     this.showCalendarIcon = true,
   }) : super(
@@ -52,8 +59,11 @@ class SnapDateInput extends SnapTextInput {
 
   String _formatDate(DateTime date) {
     if (dateFormat != null) {
-      // TODO: Implement custom date formatting
-      return date.toString();
+      return dateFormat!
+          .replaceAll('dd', date.day.toString().padLeft(2, '0'))
+          .replaceAll('MM', date.month.toString().padLeft(2, '0'))
+          .replaceAll('yyyy', date.year.toString())
+          .replaceAll('yy', date.year.toString().substring(2));
     }
 
     return '${date.day}/${date.month}/${date.year}';
@@ -117,12 +127,12 @@ class SnapDateInput extends SnapTextInput {
           showCursor: false,
           style: theme.typography.bodyMedium.copyWith(
             color:
-                isDisabled ? theme.textColor.withOpacity(0.5) : theme.textColor,
+                isDisabled ? theme.textColor.withAlpha(128) : theme.textColor,
           ),
           decoration: InputDecoration(
             hintText: hint ?? 'Select date',
             hintStyle: theme.typography.bodyMedium.copyWith(
-              color: theme.textColor.withOpacity(0.5),
+              color: theme.textColor.withAlpha(128),
             ),
             prefixIcon: prefix,
             suffixIcon: suffix,
@@ -140,9 +150,9 @@ class SnapDateInput extends SnapTextInput {
             filled: variant == InputVariant.filled,
             fillColor:
                 isDisabled
-                    ? theme.backgroundColor.withOpacity(0.5)
+                    ? theme.backgroundColor.withAlpha(128)
                     : variant == InputVariant.filled
-                    ? theme.backgroundColor.withOpacity(0.05)
+                    ? theme.backgroundColor.withAlpha(13)
                     : null,
             counterText: '',
           ),
@@ -159,7 +169,7 @@ class SnapDateInput extends SnapTextInput {
           Text(
             helper!,
             style: theme.typography.labelSmall.copyWith(
-              color: theme.textColor.withOpacity(0.7),
+              color: theme.textColor.withAlpha(128),
             ),
           ),
         ],
