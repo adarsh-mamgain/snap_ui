@@ -132,12 +132,12 @@ class SnapNumberInput extends SnapTextInput {
           showCursor: !isDisabled,
           style: theme.typography.bodyMedium.copyWith(
             color:
-                isDisabled ? theme.textColor.withOpacity(0.5) : theme.textColor,
+                isDisabled ? theme.textColor.withAlpha(128) : theme.textColor,
           ),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: theme.typography.bodyMedium.copyWith(
-              color: theme.textColor.withOpacity(0.5),
+              color: theme.textColor.withAlpha(128),
             ),
             prefixIcon: prefix,
             suffixIcon: suffix,
@@ -155,9 +155,9 @@ class SnapNumberInput extends SnapTextInput {
             filled: variant == InputVariant.filled,
             fillColor:
                 isDisabled
-                    ? theme.backgroundColor.withOpacity(0.5)
+                    ? theme.backgroundColor.withAlpha(128)
                     : variant == InputVariant.filled
-                    ? theme.backgroundColor.withOpacity(0.05)
+                    ? theme.backgroundColor.withAlpha(13)
                     : null,
             counterText: '',
           ),
@@ -174,7 +174,7 @@ class SnapNumberInput extends SnapTextInput {
           Text(
             helper!,
             style: theme.typography.labelSmall.copyWith(
-              color: theme.textColor.withOpacity(0.7),
+              color: theme.textColor.withAlpha(128),
             ),
           ),
         ],

@@ -71,7 +71,7 @@ class SnapListTile extends StatelessWidget {
         if (showDivider)
           Divider(
             height: theme.spacing.one,
-            color: theme.borderColor.withOpacity(0.1),
+            color: theme.borderColor.withAlpha(128),
           ),
       ],
     );

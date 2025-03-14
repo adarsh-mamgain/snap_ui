@@ -119,7 +119,7 @@ class SnapConfig {
        textColor = textColor ?? SnapColors.gray[900]!, // gray-900
        borderColor = borderColor ?? SnapColors.gray[200]!, // gray-200
        shadowColor =
-           shadowColor ?? SnapColors.gray[800]!.withOpacity(0.1), // gray-800
+           shadowColor ?? SnapColors.gray[800]!.withAlpha(128), // gray-800
        defaultPadding = defaultPadding ?? const EdgeInsets.all(16),
        defaultMargin = defaultMargin ?? const EdgeInsets.all(16),
        defaultBorderRadius = defaultBorderRadius ?? BorderRadius.circular(8),
@@ -129,7 +129,7 @@ class SnapConfig {
            defaultBoxShadow ??
            [
              BoxShadow(
-               color: SnapColors.gray[800]!.withOpacity(0.05),
+               color: SnapColors.gray[800]!.withAlpha(128),
                offset: const Offset(0, 1),
                blurRadius: 2,
                spreadRadius: 0,

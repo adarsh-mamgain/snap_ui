@@ -46,7 +46,7 @@ class SnapCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: borderRadius ?? theme.borderRadius.lg,
               border: Border.all(
-                color: theme.borderColor.withOpacity(0.1),
+                color: theme.borderColor.withAlpha(128),
                 width: 1,
               ),
             ),

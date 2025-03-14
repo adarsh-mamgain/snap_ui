@@ -8,7 +8,6 @@ class SnapSearchInput extends SnapTextInput {
   final bool showClearButton;
   final bool showSearchIcon;
   final String? searchHint;
-  final Widget? prefix;
 
   SnapSearchInput({
     super.key,
@@ -25,10 +24,9 @@ class SnapSearchInput extends SnapTextInput {
     this.showClearButton = true,
     this.showSearchIcon = true,
     this.searchHint,
-    this.prefix,
   }) : super(
          hint: searchHint ?? 'Search...',
-         prefix: prefix ?? (showSearchIcon ? const Icon(Icons.search) : null),
+         prefix: showSearchIcon ? const Icon(Icons.search) : null,
          suffix:
              showClearButton
                  ? IconButton(
@@ -99,12 +97,12 @@ class SnapSearchInput extends SnapTextInput {
           showCursor: !isDisabled,
           style: theme.typography.bodyMedium.copyWith(
             color:
-                isDisabled ? theme.textColor.withOpacity(0.5) : theme.textColor,
+                isDisabled ? theme.textColor.withAlpha(128) : theme.textColor,
           ),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: theme.typography.bodyMedium.copyWith(
-              color: theme.textColor.withOpacity(0.5),
+              color: theme.textColor.withAlpha(128),
             ),
             prefixIcon: prefix,
             suffixIcon: suffix,
@@ -122,9 +120,9 @@ class SnapSearchInput extends SnapTextInput {
             filled: variant == InputVariant.filled,
             fillColor:
                 isDisabled
-                    ? theme.backgroundColor.withOpacity(0.5)
+                    ? theme.backgroundColor.withAlpha(128)
                     : variant == InputVariant.filled
-                    ? theme.backgroundColor.withOpacity(0.05)
+                    ? theme.backgroundColor.withAlpha(13)
                     : null,
             counterText: '',
           ),
@@ -141,7 +139,7 @@ class SnapSearchInput extends SnapTextInput {
           Text(
             helper!,
             style: theme.typography.labelSmall.copyWith(
-              color: theme.textColor.withOpacity(0.7),
+              color: theme.textColor.withAlpha(128),
             ),
           ),
         ],

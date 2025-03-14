@@ -26,14 +26,14 @@ class SnapThemeShadows {
       none: const [],
       sm: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.05),
+          color: Colors.black.withAlpha(128),
           offset: const Offset(0, 1),
           blurRadius: 2,
         ),
       ],
       md: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withAlpha(128),
           offset: const Offset(0, 4),
           blurRadius: 6,
           spreadRadius: -1,
@@ -41,7 +41,7 @@ class SnapThemeShadows {
       ],
       lg: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withAlpha(128),
           offset: const Offset(0, 10),
           blurRadius: 15,
           spreadRadius: -3,
@@ -49,7 +49,7 @@ class SnapThemeShadows {
       ],
       xl: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withAlpha(128),
           offset: const Offset(0, 20),
           blurRadius: 25,
           spreadRadius: -5,
@@ -57,7 +57,7 @@ class SnapThemeShadows {
       ],
       twoXl: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.25),
+          color: Colors.black.withAlpha(128),
           offset: const Offset(0, 25),
           blurRadius: 50,
           spreadRadius: -12,
@@ -65,7 +65,7 @@ class SnapThemeShadows {
       ],
       inner: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.05),
+          color: Colors.black.withAlpha(128),
           offset: const Offset(0, 2),
           blurRadius: 4,
           spreadRadius: -1,
@@ -78,7 +78,7 @@ class SnapThemeShadows {
   List<BoxShadow> withColor(Color color) {
     return [
       BoxShadow(
-        color: color.withOpacity(0.1),
+        color: color.withAlpha(128),
         offset: const Offset(0, 4),
         blurRadius: 6,
         spreadRadius: -1,
@@ -90,7 +90,7 @@ class SnapThemeShadows {
   List<BoxShadow> withOpacity(double opacity) {
     return [
       BoxShadow(
-        color: Colors.black.withOpacity(opacity),
+        color: Colors.black.withValues(alpha: opacity),
         offset: const Offset(0, 4),
         blurRadius: 6,
         spreadRadius: -1,

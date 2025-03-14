@@ -52,20 +52,20 @@ class SnapButton extends StatelessWidget {
 
   ButtonStyle _getButtonStyle(SnapUiTheme theme) {
     final baseStyle = ButtonStyle(
-      padding: MaterialStateProperty.all(_getPadding()),
-      shape: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(_getPadding()),
+      shape: WidgetStateProperty.all(
         RoundedRectangleBorder(borderRadius: theme.borderRadius.md),
       ),
-      elevation: MaterialStateProperty.all(0),
-      backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return theme.primaryColor.withOpacity(0.5);
+      elevation: WidgetStateProperty.all(0),
+      backgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return theme.primaryColor.withAlpha(128);
         }
         return _getBackgroundColor(theme);
       }),
-      foregroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return Colors.white.withOpacity(0.5);
+      foregroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return Colors.white.withAlpha(128);
         }
         return _getForegroundColor(theme);
       }),
