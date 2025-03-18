@@ -113,3 +113,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 If you encounter any issues or have questions, please file an issue on the GitHub repository.
+
+## Star History
+
+<a href="https://www.star-history.com/#adarsh-mamgain/snap_ui&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=adarsh-mamgain/snap_ui&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=adarsh-mamgain/snap_ui&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=adarsh-mamgain/snap_ui&type=Date" />
+ </picture>
+</a>
