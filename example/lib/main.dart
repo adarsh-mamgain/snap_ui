@@ -12,13 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SnapUiThemeProvider(
       theme: SnapUiTheme.lightTheme,
-      child: MaterialApp(
+      child: const MaterialApp(
         title: 'SnapUI Example',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          useMaterial3: true,
-        ),
-        home: const HomePage(),
+        home: HomePage(),
       ),
     );
   }
