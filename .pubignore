@@ -1,0 +1,9 @@
+**/.*
+docs/
+test/
+.dart_tool/
+.idea/
+.vscode/
+*.iml
+*.log
+pubspec.lock 
