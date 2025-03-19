@@ -2,15 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:snap_ui/src/themes/theme.dart';
 import 'text_input.dart';
 
-/// A specialized text input for date selection
+/// A specialized text input component for date selection that follows SnapUI's design system.
+///
+/// The [SnapDateInput] widget extends [SnapTextInput] to provide a date picker interface.
+/// It supports custom date formats, date range restrictions, and maintains the same
+/// styling options as the base text input.
+///
+/// Example usage:
+/// ```dart
+/// SnapDateInput(
+///   label: 'Birth Date',
+///   initialDate: DateTime.now(),
+///   firstDate: DateTime(1900),
+///   lastDate: DateTime.now(),
+///   dateFormat: 'dd/MM/yyyy',
+///   onDateSelected: (date) {
+///     // Handle date selection
+///   },
+/// )
+/// ```
 class SnapDateInput extends SnapTextInput {
+  /// The initial date to show in the date picker.
   final DateTime? initialDate;
+
+  /// The earliest date that can be selected.
   final DateTime? firstDate;
+
+  /// The latest date that can be selected.
   final DateTime? lastDate;
+
+  /// Callback function that is called when a date is selected.
   final void Function(DateTime?)? onDateSelected;
+
+  /// The format to display the date in. Supported formats:
+  /// * 'dd/MM/yyyy' - Day/Month/Year (e.g., '23/03/2024')
+  /// * 'MM/dd/yyyy' - Month/Day/Year (e.g., '03/23/2024')
+  /// * 'yyyy/MM/dd' - Year/Month/Day (e.g., '2024/03/23')
+  /// * 'yyyy/dd/MM' - Year/Day/Month (e.g., '2024/23/03')
   final String? dateFormat;
+
+  /// Whether to show a calendar icon in the input field.
   final bool showCalendarIcon;
 
+  /// Creates a new [SnapDateInput].
+  ///
+  /// The [SnapDateInput] inherits most properties from [SnapTextInput] and adds
+  /// date-specific functionality. The input is read-only by default and shows
+  /// a date picker when tapped.
   const SnapDateInput({
     super.key,
     super.controller,
@@ -27,19 +65,16 @@ class SnapDateInput extends SnapTextInput {
     this.firstDate,
     this.lastDate,
     this.onDateSelected,
-
-    /// The format to display the date in. Supported formats:
-    /// - 'dd/MM/yyyy' - 24 hour format (e.g. '23:59')
-    /// - 'MM/dd/yyyy' - 12 hour format with AM/PM (e.g. '11:59 PM')
-    /// - 'yyyy/MM/dd' - 12 hour format without leading zero (e.g. '9:59 AM')
-    /// - 'yyyy/dd/MM' - 24 hour format with seconds (e.g. '23:59:59')
-    /// - 'yyyy/MM/dd' - 12 hour format with seconds (e.g. '11:59:59 PM')
     this.dateFormat,
     this.showCalendarIcon = true,
   }) : super(
          prefix: showCalendarIcon ? const Icon(Icons.calendar_today) : null,
        );
 
+  /// Shows the date picker dialog.
+  ///
+  /// This method is called when the input is tapped and displays a date picker
+  /// with the configured date range and initial date.
   Future<void> _showDatePicker(BuildContext context) async {
     if (isDisabled) return;
 
@@ -57,6 +92,9 @@ class SnapDateInput extends SnapTextInput {
     }
   }
 
+  /// Formats the selected date according to the specified format.
+  ///
+  /// If no format is specified, defaults to 'dd/MM/yyyy'.
   String _formatDate(DateTime date) {
     if (dateFormat != null) {
       return dateFormat!
