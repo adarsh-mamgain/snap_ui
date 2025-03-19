@@ -1,7 +1,7 @@
 name: snap_ui
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "A modern, customizable Flutter component library with beautiful UI elements and smooth animations."
+version: 1.0.0-beta
+homepage: https://github.com/adarsh-mamgain/snap_ui
 
 environment:
   sdk: ^3.7.0
@@ -15,6 +15,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  dartdoc: ^6.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

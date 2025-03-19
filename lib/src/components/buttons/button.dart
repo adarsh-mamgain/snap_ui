@@ -1,17 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:snap_ui/src/themes/theme.dart';
 
-/// Base button component for SnapUI
+/// A customizable button component that follows SnapUI design system.
+///
+/// The [SnapButton] widget provides a consistent button implementation with various
+/// styles, sizes, and states. It supports loading states, disabled states, and
+/// different variants (primary, secondary, outlined, text).
+///
+/// Example usage:
+/// ```dart
+/// SnapButton(
+///   onPressed: () {
+///     // Handle button press
+///   },
+///   child: Text('Click Me'),
+///   variant: ButtonVariant.primary,
+///   size: ButtonSize.medium,
+/// )
+/// ```
 class SnapButton extends StatelessWidget {
+  /// Callback function that is called when the button is pressed.
   final VoidCallback? onPressed;
+
+  /// The widget to display inside the button.
   final Widget child;
+
+  /// Custom button style that can override the default theme styles.
   final ButtonStyle? style;
+
+  /// Whether the button is in a loading state.
+  /// When true, displays a loading indicator instead of the child.
   final bool isLoading;
+
+  /// Whether the button is disabled.
+  /// When true, the button cannot be pressed and appears grayed out.
   final bool isDisabled;
+
+  /// The visual style variant of the button.
+  /// See [ButtonVariant] for available options.
   final ButtonVariant variant;
+
+  /// The size of the button.
+  /// See [ButtonSize] for available options.
   final ButtonSize size;
+
+  /// Whether the button should take up the full width of its parent.
   final bool isFullWidth;
 
+  /// Creates a new [SnapButton].
+  ///
+  /// The [onPressed] and [child] parameters are required.
+  /// All other parameters are optional and have default values.
   const SnapButton({
     super.key,
     required this.onPressed,
@@ -119,8 +158,19 @@ class SnapButton extends StatelessWidget {
   }
 }
 
-/// Button variants for SnapUI
+/// Defines the visual style variants available for [SnapButton].
+///
+/// The variants determine the button's appearance:
+/// * [primary] - Main action button with solid background
+/// * [secondary] - Alternative action button with different styling
+/// * [outlined] - Button with transparent background and border
+/// * [text] - Text-only button without background or border
 enum ButtonVariant { primary, secondary, outlined, text }
 
-/// Button sizes for SnapUI
+/// Defines the size options available for [SnapButton].
+///
+/// The sizes determine the button's dimensions:
+/// * [small] - Compact button for dense layouts
+/// * [medium] - Standard button size
+/// * [large] - Prominent button for important actions
 enum ButtonSize { small, medium, large }
